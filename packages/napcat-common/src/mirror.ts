@@ -163,7 +163,7 @@ let cacheTimestamp: number = 0;
 async function testMirrorLatency (mirror: string, timeout: number = 5000): Promise<MirrorTestResult> {
   // 使用一个实际存在的小文件来测试（README 或小型 release asset）
   // 用 HEAD 请求，不下载实际内容
-  const testUrl = 'https://github.com/NapNeko/NapCatQQ/releases/latest';
+  const testUrl = 'https://github.com/Mangfluff/NapCatQQ-PluginFix/releases/latest';
   const url = buildMirrorUrl(testUrl, mirror);
   const start = Date.now();
 
@@ -918,7 +918,7 @@ async function getWorkflowRunsFromHtml (
 
         for (const row of rows) {
           // 提取 Run ID 和 Status
-          // <a href="/NapNeko/NapCatQQ/actions/runs/20799940346" ... aria-label="completed successfully: ...">
+          // <a href="/Mangfluff/NapCatQQ-PluginFix/actions/runs/20799940346" ... aria-label="completed successfully: ...">
           const runMatch = new RegExp(`href="/${owner}/${repo}/actions/runs/(\\d+)"[^>]*aria-label="([^"]*)"`, 'i').exec(row);
 
           if (!runMatch || !runMatch[1] || !runMatch[2]) continue;

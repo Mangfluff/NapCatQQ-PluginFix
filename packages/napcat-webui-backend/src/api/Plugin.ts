@@ -3,7 +3,7 @@ import { WebUiDataRuntime } from '@/napcat-webui-backend/src/helper/Data';
 import { sendError, sendSuccess } from '@/napcat-webui-backend/src/utils/response';
 import { NapCatOneBot11Adapter } from '@/napcat-onebot/index';
 import { OB11PluginMangerAdapter } from '@/napcat-onebot/network/plugin-manger';
-import { webUiPathWrapper } from '@/napcat-webui-backend/index';
+import { webUiPathWrapper, WebUiConfig } from '@/napcat-webui-backend/index';
 import path from 'path';
 import fs from 'fs';
 import compressing from 'compressing';
@@ -92,6 +92,16 @@ export const RegisterPluginManagerHandler: RequestHandler = async (_req, res) =>
       ob11,
       ob11.actions
     );
+
+    // 从 WebUI 配置中读取热重载间隔并应用
+    try {
+      const webuiConfig = await WebUiConfig.GetWebUIConfig();
+      if (webuiConfig.hotReloadInterval && webuiConfig.hotReloadInterval > 0) {
+        pluginManager.setHotReloadInterval(webuiConfig.hotReloadInterval);
+      }
+    } catch {
+      // 忽略热重载配置读取失败
+    }
 
     await ob11.networkManager.registerAdapterAndOpen(pluginManager);
 
@@ -664,4 +674,47 @@ export const GetPluginIconHandler: RequestHandler = async (req, res) => {
   }
 
   return res.sendFile(iconPath);
+};
+
+/**
+ * 获取热重载配置状态
+ */
+export const GetHotReloadStatusHandler: RequestHandler = async (_req, res) => {
+  const pluginManager = getPluginManager();
+  if (!pluginManager) {
+    return sendSuccess(res, { enabled: false, interval: 0 });
+  }
+  return sendSuccess(res, {
+    enabled: pluginManager.hotReloadIntervalSeconds > 0,
+    interval: pluginManager.hotReloadIntervalSeconds,
+  });
+};
+
+/**
+ * 设置热重载配置
+ * Body: { interval: number } 单位秒，0=禁用
+ */
+export const SetHotReloadConfigHandler: RequestHandler = async (req, res) => {
+  const { interval } = req.body;
+
+  if (interval === undefined || interval < 0) {
+    return sendError(res, 'Invalid interval value (must be >= 0)');
+  }
+
+  const pluginManager = getPluginManager();
+  if (!pluginManager) {
+    return sendError(res, 'Plugin Manager not found');
+  }
+
+  try {
+    pluginManager.setHotReloadInterval(interval);
+    return sendSuccess(res, {
+      message: interval > 0
+        ? `Hot reload enabled (interval: ${interval}s)`
+        : 'Hot reload disabled',
+      interval,
+    });
+  } catch (e: any) {
+    return sendError(res, 'Failed to set hot reload config: ' + e.message);
+  }
 };

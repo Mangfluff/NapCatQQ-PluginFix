@@ -14,6 +14,8 @@ import {
   PluginConfigChangeHandler,
   ImportLocalPluginHandler,
   GetPluginIconHandler,
+  GetHotReloadStatusHandler,
+  SetHotReloadConfigHandler,
 } from '@/napcat-webui-backend/src/api/Plugin';
 import {
   GetPluginStoreListHandler,
@@ -70,6 +72,10 @@ router.post('/Config/Change', PluginConfigChangeHandler);
 router.post('/RegisterManager', RegisterPluginManagerHandler);
 router.post('/Import', upload.single('plugin'), ImportLocalPluginHandler); // 恢复插件上传
 router.get('/Icon/:pluginId', GetPluginIconHandler);
+
+// 热重载配置
+router.get('/HotReload', GetHotReloadStatusHandler);
+router.post('/HotReload', SetHotReloadConfigHandler);
 
 // 插件商店相关路由
 router.get('/Store/List', GetPluginStoreListHandler);

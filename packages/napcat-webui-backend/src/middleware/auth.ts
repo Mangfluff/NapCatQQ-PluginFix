@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { getInitialWebUiToken } from '@/napcat-webui-backend/index';
+import { getInitialWebUiToken, WebUiConfig } from '@/napcat-webui-backend/index';
 
 import { AuthHelper } from '@/napcat-webui-backend/src/helper/SignToken';
 import { sendError } from '@/napcat-webui-backend/src/utils/response';
@@ -16,6 +16,20 @@ export async function auth (req: Request, res: Response, next: NextFunction) {
     req.url === '/auth/passkey/verify-authentication') {
     return next();
   }
+
+  // 检查是否启用了 Token 鉴权
+  if (WebUiConfig) {
+    try {
+      const config = await WebUiConfig.GetWebUIConfig();
+      if (config.enableKeyAuth === false) {
+        // Token 鉴权已关闭，允许直接访问
+        return next();
+      }
+    } catch {
+      // 读取配置失败时默认走鉴权流程
+    }
+  }
+
   let hash: string | undefined;
   if (req.headers?.authorization) {
     // 切割参数以获取token

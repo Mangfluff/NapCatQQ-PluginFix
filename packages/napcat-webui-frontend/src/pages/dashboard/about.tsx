@@ -191,7 +191,7 @@ export default function AboutPage () {
   ];
 
   const links = [
-    { icon: <BsGithub />, name: 'GitHub', href: 'https://github.com/NapNeko/NapCatQQ' },
+    { icon: <BsGithub />, name: 'GitHub', href: 'https://github.com/Mangfluff/NapCatQQ-PluginFix' },
     { icon: <BsTelegram />, name: 'Telegram', href: 'https://t.me/napcatqq' },
     { icon: <BsTencentQq />, name: '交流群 欢乐一家亲', href: 'https://qm.qq.com/q/VwpnklcXqo' },
     { icon: <BsTencentQq />, name: '交流群 皇亲国戚', href: 'https://qm.qq.com/q/gq18RH7o7S' },

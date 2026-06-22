@@ -135,10 +135,10 @@ export const TestMirrorsSSEHandler: RequestHandler = async (req, res) => {
 
     if (type === 'raw') {
       mirrors = GITHUB_RAW_MIRRORS;
-      testUrl = 'https://raw.githubusercontent.com/NapNeko/NapCatQQ/main/README.md';
+      testUrl = 'https://raw.githubusercontent.com/Mangfluff/NapCatQQ-PluginFix/main/README.md';
     } else {
       mirrors = GITHUB_FILE_MIRRORS.filter(m => m);
-      testUrl = 'https://github.com/NapNeko/NapCatQQ/releases/latest';
+      testUrl = 'https://github.com/Mangfluff/NapCatQQ-PluginFix/releases/latest';
     }
 
     // 添加原始 URL 测试
@@ -216,9 +216,9 @@ export const TestSingleMirrorHandler: RequestHandler = async (req, res) => {
 
     let testUrl: string;
     if (type === 'raw') {
-      testUrl = 'https://raw.githubusercontent.com/NapNeko/NapCatQQ/main/README.md';
+      testUrl = 'https://raw.githubusercontent.com/Mangfluff/NapCatQQ-PluginFix/main/README.md';
     } else {
-      testUrl = 'https://github.com/NapNeko/NapCatQQ/releases/latest';
+      testUrl = 'https://github.com/Mangfluff/NapCatQQ-PluginFix/releases/latest';
     }
 
     const result = await testMirrorLatency(mirror || '', testUrl, 5000);

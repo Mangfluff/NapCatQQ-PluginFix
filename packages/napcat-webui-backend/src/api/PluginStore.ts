@@ -21,7 +21,7 @@ const getPluginManager = (): OB11PluginMangerAdapter | null => {
 
 // 插件商店源配置
 const PLUGIN_STORE_SOURCES = [
-  'https://raw.githubusercontent.com/NapNeko/napcat-plugin-index/main/plugins.v4.json',
+  'https://raw.githubusercontent.com/Mangfluff/NapCatQQ-PluginFix/main/plugins.v4.json',
 ];
 
 // 插件目录 - 使用 pathWrapper

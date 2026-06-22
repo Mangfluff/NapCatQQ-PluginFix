@@ -37,6 +37,10 @@ const WebUiConfigSchema = Type.Object({
   enable2FA: Type.Boolean({ default: false }),
   // TOTP 密钥
   totpSecret: Type.String({ default: '' }),
+  // 是否启用 WebUI Token 鉴权（关闭后可直接访问 WebUI）
+  enableKeyAuth: Type.Boolean({ default: true }),
+  // 插件热重载间隔（秒），0=禁用
+  hotReloadInterval: Type.Number({ default: 0 }),
 });
 
 export type WebUiConfigType = Static<typeof WebUiConfigSchema>;

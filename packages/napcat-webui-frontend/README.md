@@ -19,7 +19,7 @@
 
 # Related Projects
 
-- [NapCat](https://github.com/NapNeko/NapCatQQ/)
+- [NapCat](https://github.com/Mangfluff/NapCatQQ-PluginFix/)
 - [Karin](https://github.com/KarinJS/Karin/)
 
 # Thanks to

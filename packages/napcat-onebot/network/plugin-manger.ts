@@ -41,6 +41,12 @@ export class OB11PluginMangerAdapter extends IOB11NetworkAdapter<PluginConfig> i
   /** 插件路由注册表: ID -> 路由注册器 */
   private pluginRouters: Map<string, PluginRouterRegistryImpl> = new Map();
 
+  /** 热重载定时器 */
+  private hotReloadTimer: ReturnType<typeof setInterval> | null = null;
+
+  /** 热重载配置: 间隔秒数（0=禁用） */
+  public hotReloadIntervalSeconds: number = 0;
+
   declare config: PluginConfig;
   public NapCatConfig = NapCatConfig;
 
@@ -455,6 +461,40 @@ export class OB11PluginMangerAdapter extends IOB11NetworkAdapter<PluginConfig> i
     return path.join(this.getPluginDataPath(pluginId), 'config.json');
   }
 
+  // ==================== 热重载 ====================
+
+  /**
+   * 设置热重载间隔（秒），0 表示禁用
+   */
+  public setHotReloadInterval (seconds: number): void {
+    this.hotReloadIntervalSeconds = seconds;
+    this.restartHotReload();
+    this.logger.log(`[PluginManager] Hot reload interval set to ${seconds > 0 ? seconds + 's' : 'disabled'}`);
+  }
+
+  /**
+   * 重启热重载定时器
+   */
+  private restartHotReload (): void {
+    this.stopHotReload();
+    if (this.hotReloadIntervalSeconds > 0 && this.isEnable) {
+      this.hotReloadTimer = setInterval(async () => {
+        this.logger.log(`[PluginManager] Hot reload: scanning and reloading all plugins...`);
+        await this.reload();
+      }, this.hotReloadIntervalSeconds * 1000);
+    }
+  }
+
+  /**
+   * 停止热重载定时器
+   */
+  private stopHotReload (): void {
+    if (this.hotReloadTimer) {
+      clearInterval(this.hotReloadTimer);
+      this.hotReloadTimer = null;
+    }
+  }
+
   // ==================== 事件处理 ====================
 
   async onEvent<T extends OB11EmitEventContent> (event: T): Promise<void> {
@@ -517,6 +557,11 @@ export class OB11PluginMangerAdapter extends IOB11NetworkAdapter<PluginConfig> i
     // 扫描并加载所有插件
     await this.scanAndLoadPlugins();
 
+    // 启动热重载（如果配置了间隔）
+    if (this.hotReloadIntervalSeconds > 0) {
+      this.restartHotReload();
+    }
+
     this.logger.log(`[PluginManager] Plugin manager opened with ${this.getLoadedPlugins().length} plugins loaded`);
   }
 
@@ -527,6 +572,9 @@ export class OB11PluginMangerAdapter extends IOB11NetworkAdapter<PluginConfig> i
 
     this.logger.log('[PluginManager] Closing plugin manager...');
     this.isEnable = false;
+
+    // 停止热重载
+    this.stopHotReload();
 
     // 卸载所有已加载的插件
     for (const entry of this.plugins.values()) {

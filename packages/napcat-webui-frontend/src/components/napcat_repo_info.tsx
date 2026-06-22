@@ -45,7 +45,7 @@ export default function NapCatRepoInfo () {
     error: repoError,
     loading: repoLoading,
   } = useRequest(() =>
-    request.get<GirhubRepo>('https://api.github.com/repos/NapNeko/NapCatQQ')
+    request.get<GirhubRepo>('https://api.github.com/repos/Mangfluff/NapCatQQ-PluginFix')
   );
 
   // release info
@@ -55,7 +55,7 @@ export default function NapCatRepoInfo () {
     loading: releaseLoading,
   } = useRequest(() =>
     request.get<GithubReleaseType[]>(
-      'https://api.github.com/repos/NapNeko/NapCatQQ/releases'
+      'https://api.github.com/repos/Mangfluff/NapCatQQ-PluginFix/releases'
     )
   );
 
@@ -66,7 +66,7 @@ export default function NapCatRepoInfo () {
     loading: prLoading,
   } = useRequest(() =>
     request.get<GithubPullRequest[]>(
-      'https://api.github.com/repos/NapNeko/NapCatQQ/pulls'
+      'https://api.github.com/repos/Mangfluff/NapCatQQ-PluginFix/pulls'
     )
   );
 
@@ -77,7 +77,7 @@ export default function NapCatRepoInfo () {
     loading: contributorsLoading,
   } = useRequest(() =>
     request.get<GithubContributor[]>(
-      'https://api.github.com/repos/NapNeko/NapCatQQ/contributors'
+      'https://api.github.com/repos/Mangfluff/NapCatQQ-PluginFix/contributors'
     )
   );
 
@@ -98,34 +98,34 @@ export default function NapCatRepoInfo () {
       onAction={(key: React.Key) => {
         switch (key) {
           case 'releases':
-            openUrl('https://github.com/NapNeko/NapCatQQ/releases', true);
+            openUrl('https://github.com/Mangfluff/NapCatQQ-PluginFix/releases', true);
             break;
           case 'contributors':
             openUrl(
-              'https://github.com/NapNeko/NapCatQQ/graphs/contributors',
+              'https://github.com/Mangfluff/NapCatQQ-PluginFix/graphs/contributors',
               true
             );
             break;
           case 'license':
             openUrl(
-              'https://github.com/NapNeko/NapCatQQ/blob/main/LICENSE',
+              'https://github.com/Mangfluff/NapCatQQ-PluginFix/blob/main/LICENSE',
               true
             );
             break;
           case 'watchers':
-            openUrl('https://github.com/NapNeko/NapCatQQ/watchers', true);
+            openUrl('https://github.com/Mangfluff/NapCatQQ-PluginFix/watchers', true);
             break;
           case 'star':
-            openUrl('https://github.com/NapNeko/NapCatQQ/stargazers', true);
+            openUrl('https://github.com/Mangfluff/NapCatQQ-PluginFix/stargazers', true);
             break;
           case 'issues':
-            openUrl('https://github.com/NapNeko/NapCatQQ/issues', true);
+            openUrl('https://github.com/Mangfluff/NapCatQQ-PluginFix/issues', true);
             break;
           case 'pull_requests':
-            openUrl('https://github.com/NapNeko/NapCatQQ/pulls', true);
+            openUrl('https://github.com/Mangfluff/NapCatQQ-PluginFix/pulls', true);
             break;
           default:
-            openUrl('https://github.com/NapNeko/NapCatQQ', true);
+            openUrl('https://github.com/Mangfluff/NapCatQQ-PluginFix', true);
         }
       }}
     >
