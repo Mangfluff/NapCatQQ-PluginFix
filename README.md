@@ -1,87 +1,193 @@
-<img src="https://napneko.github.io/assets/newnewlogo.png" width = "305" height = "411" alt="NapCat" align=right />
 <div align="center">
 
-# NapCat
+# NapCatQQ-PluginFix
 
-_Modern protocol-side framework implemented based on NTQQ._
+**基于 NTQQ 的 Bot 协议端 — 改版增强版**
 
-> 云起兮风生，心向远方兮路未曾至.
+> 在原有 NapCat 基础上修复纯第三方插件支持，添加热重载等实用功能
+
+[![GitHub release](https://img.shields.io/github/v/release/Mangfluff/NapCatQQ-PluginFix)](https://github.com/Mangfluff/NapCatQQ-PluginFix/releases)
+[![GitHub stars](https://img.shields.io/github/stars/Mangfluff/NapCatQQ-PluginFix)](https://github.com/Mangfluff/NapCatQQ-PluginFix/stargazers)
+[![License](https://img.shields.io/github/license/Mangfluff/NapCatQQ-PluginFix)](./LICENSE)
 
 </div>
 
 ---
 
-## New Framework ?
+## ⚠️ 本仓库说明
 
-可以试试更新更好用的 [SnowLuma](https://github.com/SnowLuma/SnowLuma) 作为NapCat Gui替代品。
+本仓库是基于 NapCat 的 **改版 (PluginFix)**，主要修复了原版新版本中移除纯第三方插件支持、禁用 WebUI 插件上传的问题，并额外添加了实用功能增强。
 
-## Welcome
+**改版与原版的差异：**
 
-- NapCatQQ is a modern implementation of the Bot protocol based on NTQQ.
-  - NapCatQQ 是现代化的基于 NTQQ 的 Bot 协议端实现
-
-## Feature
-
-- **Easy to Use**
-  - 作为初学者能够轻松使用.
-- **Quick and Efficient**
-  - 在低内存操作系统长时运行.
-- **Rich API Interface**
-  - 完整实现了大部分标准接口.
-- **Stable and Reliable**
-  - 持续稳定的开发与维护.
-
-## Quick Start
-
-可前往 [Release](https://github.com/NapNeko/NapCatQQ/releases/) 页面下载最新版本
-
-**首次使用**请务必查看如下文档看使用教程
-
-> 项目非盈利，涉及 对接问题/基础问题/下层框架问题 请自行搜索解决，本项目社区不提供此类解答。
-
-## Link
-
-| Docs | [![Github.IO](https://img.shields.io/badge/docs%20on-Github.IO-orange)](https://napneko.github.io/) | [![Cloudflare.Worker](https://img.shields.io/badge/docs%20on-Cloudflare.Worker-black)](https://doc.napneko.icu/) | [![Cloudflare.HKServer](https://img.shields.io/badge/docs%20on-Cloudflare.HKServer-informational)](https://napcat.napneko.icu/) |
-|:-:|:-:|:-:|:-:|
-
-| Docs | [![Cloudflare.Pages](https://img.shields.io/badge/docs%20on-Cloudflare.Pages-blue)](https://napneko.pages.dev/) | [![Server.Other](https://img.shields.io/badge/docs%20on-Server.Other-green)](https://napcat.top/) | [![NapCat.Top](https://img.shields.io/badge/docs%20on-NapCat.Top-red)](https://napcat.top/) |
-|:-:|:-:|:-:|:-:|
-
-| QQ Group | [![NapCat Family Group 4](https://img.shields.io/badge/NapCat%20Family%20Group%204-Join-blue)](https://qm.qq.com/q/E4nfkGD6oK) | [![NapCat Family Group 3](https://img.shields.io/badge/NapCat%20Family%20Group%203-Join-blue)](https://qm.qq.com/q/XyiyGPqa42) | [![NapCat Family Group 2](https://img.shields.io/badge/NapCat%20Family%20Group%202-Join-blue)](https://qm.qq.com/q/gq18RH7o7S) | [![NapCat Family Group 1](https://img.shields.io/badge/NapCat%20Family%20Group%201-Join-blue)](https://qm.qq.com/q/VwpnklcXqo) |
-|:-:|:-:|:-:|:-:|:-:|
-
-| Telegram | [![Telegram](https://img.shields.io/badge/Telegram-napcatqq-blue)](https://t.me/napcatqq) |
-|:-:|:-:|
-
-| DeepWiki | [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/NapNeko/NapCatQQ) |
-|:-:|:-:|
-
-> QQ群因为特殊原因需要入群密钥，请在webui关于页面获取，仅最新的100个版本以内有效。
-
-社区相关日后会进一步加强审核，并严格限制一定时间的入群人数，请具备一定编程基础和问题解决能力再申请入群。
-
-[困困猫猫的高中](https://qm.qq.com/q/14aUVclRUA)
-
-## Thanks
-
-- [Lagrange](https://github.com/LagrangeDev/Lagrange.Core) 对本项目的大力支持 参考部分代码 已获授权
-
-- [AstrBot](https://github.com/AstrBotDevs/AstrBot) 是完美适配本项目的LLM Bot框架 在此推荐一下
-
-- [MaiBot](https://github.com/MaiM-with-u/MaiBot) 一只赛博群友 麦麦 Bot框架 在此推荐一下
-
-- [qq-chat-exporter](https://github.com/shuakami/qq-chat-exporter/) 基于NapCat的消息导出工具 在此推荐一下
-
-- 不过最最重要的 还是需要感谢屏幕前的你哦~
+| 特性 | 原版新版本 | PluginFix 改版 |
+|------|-----------|---------------|
+| 第三方纯插件加载 | ❌ 仅限官方白名单 | ✅ 完全支持 |
+| WebUI 插件上传 | ❌ 被禁用 | ✅ 已恢复 |
+| 插件热重载 | ❌ 不支持 | ✅ 定时热重载（可配置） |
+| WebUI 鉴权开关 | ❌ 一直需要 Token | ✅ 可关闭（局域网友好） |
+| 更新源 | 官方仓库 | 本仓库 |
 
 ---
 
-## License
+## ✨ 改版特性详解
 
-本项目采用 混合协议 开源，因此使用本项目时，你需要注意以下几点：
+### 🧩 纯插件支持（核心修复）
 
-1. 第三方库代码或修改部分遵循其原始开源许可.
-2. 本项目获取部分项目授权而不受部分约束
-2. 项目其余逻辑代码采用[本仓库开源许可](./LICENSE).
+移除官方的 **OFFICIAL_PLUGIN_IDS 白名单限制**，所有通过安全检测的第三方纯插件均可正常加载，恢复旧版 NapCat 的插件生态。
 
-**本仓库仅用于提高易用性，实现消息推送类功能，此外，禁止任何项目未经仓库主作者授权基于 NapCat 代码开发。使用请遵守当地法律法规，由此造成的问题由使用者和提供违规使用教程者负责。**
+### 📤 WebUI 插件上传
+
+恢复 WebUI 中插件导入上传功能，支持通过管理界面上传 `.zip` 格式的插件包，自动解压安装并加载。
+
+### 🔄 插件定时热重载
+
+新增插件定时热重载功能，可在 WebUI 配置（或直接修改 `config/webui.json`）中设置自动重载间隔，开发插件时无需手动重启。
+
+```
+config/webui.json 配置:
+"hotReloadInterval": 60   // 每 60 秒自动重载一次，0 为禁用
+```
+
+### 🔓 WebUI 鉴权可关闭
+
+新增 `enableKeyAuth` 配置项，设为 `false` 后可免 Token 登录 WebUI，适合局域网内部使用。
+
+```
+config/webui.json 配置:
+"enableKeyAuth": false    // true=需要Token登录，false=免登录
+```
+
+---
+
+## 🚀 快速安装
+
+### Linux / macOS
+
+```bash
+# 一键安装
+bash <(curl -sL https://github.com/Mangfluff/NapCatQQ-PluginFix/raw/main/install.sh)
+
+# 或指定安装目录
+INSTALL_DIR=/opt/napcat bash <(curl -sL https://github.com/Mangfluff/NapCatQQ-PluginFix/raw/main/install.sh)
+```
+
+### Windows
+
+```powershell
+# PowerShell 安装
+powershell -c "irm https://github.com/Mangfluff/NapCatQQ-PluginFix/raw/main/install.ps1 | iex"
+```
+
+或直接下载 `install.bat` 双击运行。
+
+---
+
+## 🔄 从原版 NapCat 更新
+
+无需重新安装！直接在原有 NapCat 目录运行更新脚本，会自动备份配置并替换文件。
+
+### Linux / macOS
+
+```bash
+# 方法1：在 NapCat 目录直接执行
+cd /path/to/your/napcat
+bash <(curl -sL https://github.com/Mangfluff/NapCatQQ-PluginFix/raw/main/update.sh)
+
+# 方法2：指定 NapCat 安装目录
+bash <(curl -sL https://github.com/Mangfluff/NapCatQQ-PluginFix/raw/main/update.sh) /path/to/napcat
+```
+
+### Windows
+
+```powershell
+# 方法1：打开 PowerShell，cd 到 NapCat 目录后执行
+cd D:\NapCatQQ
+powershell -c "irm https://github.com/Mangfluff/NapCatQQ-PluginFix/raw/main/update.ps1 | iex"
+
+# 方法2：下载 update.bat 放到 NapCat 目录双击运行
+```
+
+### 更新脚本会做什么？
+
+1. **检测** — 自动识别原版 NapCat 安装目录
+2. **备份** — 自动备份 `config/`、`plugins/`、`.env` 到 `.backup-时间戳/`
+3. **下载** — 克隆 PluginFix 改版仓库
+4. **构建** — 自动安装依赖并构建
+5. **更新** — 替换文件，保留配置和插件
+6. **完成** — 重启即可使用
+
+> 所有配置和插件数据都会被保留，如需回退只需还原备份目录即可。
+
+---
+
+## 📋 系统要求
+
+| 依赖 | 最低版本 |
+|------|---------|
+| Node.js | v18+ |
+| pnpm | 最新（自动安装） |
+| Git | 任意版本 |
+
+---
+
+## 🔧 手动构建
+
+```bash
+git clone https://github.com/Mangfluff/NapCatQQ-PluginFix.git
+cd NapCatQQ-PluginFix
+pnpm install
+pnpm build:shell     # 构建 Shell 模式
+pnpm build:webui     # 构建 WebUI 前端
+pnpm build:plugin-builtin  # 构建内置插件
+```
+
+---
+
+## 📖 使用方法
+
+### Shell 模式启动
+
+```bash
+cd NapCatQQ-PluginFix
+node index.js
+```
+
+### WebUI 管理
+
+启动后浏览器打开：`http://localhost:6099/webui`
+
+首次启动会自动生成随机 Token，可在 `config/webui.json` 中查看或修改。
+
+### 配置说明
+
+配置文件位于 `config/webui.json`：
+
+```json
+{
+    "host": "::",
+    "port": 6099,
+    "token": "your_token",
+    "loginRate": 10,
+    "enable2FA": false,
+    "enableKeyAuth": true,
+    "hotReloadInterval": 0
+}
+```
+
+---
+
+## 🤝 致谢
+
+- [Lagrange](https://github.com/LagrangeDev/Lagrange.Core) — 参考部分代码，已获授权
+- [AstrBot](https://github.com/AstrBotDevs/AstrBot) — 完美适配的 LLM Bot 框架
+- [MaiBot](https://github.com/MaiM-with-u/MaiBot) — 麦麦 Bot 框架
+- 原始 NapCat 项目团队 — 优秀的 Bot 协议端实现
+
+---
+
+## 📄 许可证
+
+本项目采用混合协议开源。第三方库代码或修改部分遵循其原始开源许可。项目其余逻辑代码采用本仓库开源许可。
+
+**本仓库仅用于提高易用性，实现消息推送类功能。使用请遵守当地法律法规，由此造成的问题由使用者负责。**
