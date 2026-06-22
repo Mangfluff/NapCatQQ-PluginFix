@@ -10,13 +10,7 @@ import {
 } from './types';
 const require = createRequire(import.meta.url);
 
-/** 允许加载的官方插件 ID 白名单。不在表内的插件一律拒绝加载。 */
-const OFFICIAL_PLUGIN_IDS = new Set<string>([
-  'napcat-plugin-builtin',
-  'napcat-plugin-cleaner',
-  'napcat-plugin-ssqq',
-  'napcat-plugin-qce',
-]);
+/** 敏感词扫描仅在命中时拒绝加载（黑灰产/支付发卡相关）。非官方插件不再被拦截。 */
 
 /**
  * 敏感词表：插件源码命中（黑灰产 / 支付发卡相关）即拒绝加载。
@@ -146,7 +140,7 @@ export class PluginLoader {
       // 获取插件 ID（包名或目录名）
       const pluginId = packageJson?.name || dirname;
 
-      // 官方白名单 + 敏感词校验：被拒绝的插件视为不可见，
+      // 敏感词校验：被拒绝的插件视为不可见，
       // 不入列表、不加载、更不会被动态导入执行。
       // 该检查置于此处统一拦截 scanPlugins 与 rescanPlugin（安装/重载）两条路径。
       const rejectReason = this.getRejectReason(pluginId, pluginDir);
@@ -232,24 +226,17 @@ export class PluginLoader {
     return null;
   }
 
-  /** 是否为白名单内的官方插件 */
-  isOfficialPlugin (pluginId: string): boolean {
-    return OFFICIAL_PLUGIN_IDS.has(pluginId);
-  }
-
   /**
-   * 判断插件是否应被拒绝（非官方 / 命中敏感词）。
+   * 判断插件是否应被拒绝（仅命中敏感词时拒绝）。
+   * 旧版白名单限制已被移除，所有通过敏感词检测的插件均可加载。
    * @returns 拒绝原因；通过校验返回 null
    */
   private getRejectReason (pluginId: string, pluginDir: string): string | null {
     const hit = this.scanSensitiveWords(pluginDir);
-    if (this.isOfficialPlugin(pluginId)) {
-      return null;
-    }
     if (hit) {
       return `sensitive keyword "${hit}"`;
     }
-    return "not in official plugin whitelist";
+    return null; // 所有插件均可加载（旧版行为）
   }
 
   /**
